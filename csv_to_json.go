@@ -21,7 +21,7 @@ func csvToJson(context *cli.Context) error {
 		}
 
 		//  if nothing was piped in, just exit
-		if fi.Mode()&os.ModeCharDevice != 0 || fi.Size() < 1 {
+		if fi.Mode()&os.ModeCharDevice != 0 {
 			return nil
 		}
 
