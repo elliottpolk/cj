@@ -102,5 +102,4 @@ func csvToJson(context *cli.Context) error {
 		}
 	}
 
-	return nil
 }
