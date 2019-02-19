@@ -37,7 +37,7 @@ func csvToJSON(context *cli.Context) error {
 
 	w := &writer{os.Stdout}
 	if outfile := context.String("output-file"); len(outfile) > 0 {
-		out, err := os.OpenFile(outfile, os.O_WRONLY|os.O_CREATE, 0666)
+		out, err := os.OpenFile(outfile, os.O_WRONLY|os.O_CREATE, 0600)
 		if err != nil {
 			return cli.Exit(errors.Wrap(err, "unable to open output file"), 1)
 		}
