@@ -42,7 +42,7 @@ func main() {
 			OutputFileFlag,
 			DelimiterFlag,
 		},
-		Action: csvToJson,
+		Action: csvToJSON,
 	}
 
 	app.Run(os.Args)

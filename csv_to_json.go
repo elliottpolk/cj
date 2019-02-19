@@ -10,7 +10,7 @@ import (
 	"gopkg.in/urfave/cli.v2"
 )
 
-func csvToJson(context *cli.Context) error {
+func csvToJSON(context *cli.Context) error {
 	var in *os.File
 
 	if infile := context.String(InputFileFlag.Names()[0]); len(infile) < 1 {
