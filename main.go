@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"gopkg.in/urfave/cli.v2"
@@ -45,5 +46,7 @@ func main() {
 		Action: csvToJSON,
 	}
 
-	app.Run(os.Args)
+	if err := app.Run(os.Args); err != nil {
+		log.Fatalf("app.Run: %v", err)
+	}
 }
