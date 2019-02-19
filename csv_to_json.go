@@ -53,14 +53,14 @@ func csvToJSON(context *cli.Context) error {
 	var columns []string
 	for tick := 0; ; tick++ {
 		r, errR := reader.Read()
-		if errR != nil {
-			if errR == io.EOF {
-				if err := w.write("]"); err != nil {
-					return cli.Exit(errors.Wrap(err, "unable to write closing bracket"), 1)
-				}
-				return nil
+		switch errR {
+		case nil:
+		case io.EOF:
+			if err := w.write("]"); err != nil {
+				return cli.Exit(errors.Wrap(err, "unable to write closing bracket"), 1)
 			}
-
+			return nil
+		default:
 			return cli.Exit(errors.Wrap(errR, "unable to read in from input file"), 1)
 		}
 
