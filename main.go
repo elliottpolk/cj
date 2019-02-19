@@ -7,31 +7,33 @@ import (
 	"gopkg.in/urfave/cli.v2"
 )
 
+var version string
+
+const inputFileFlagName = "input-file"
+const outputFileFlagName = "output-file"
+const delimiterFlagName = "delimiter"
+
 type row map[string]interface{}
 
 func main() {
-	var (
-		version string
+	InputFileFlag := &cli.StringFlag{
+		Name:    inputFileFlagName,
+		Aliases: []string{"in"},
+		Usage:   "file to convert from",
+	}
 
-		InputFileFlag = &cli.StringFlag{
-			Name:    "input-file",
-			Aliases: []string{"in"},
-			Usage:   "file to convert from",
-		}
+	OutputFileFlag := &cli.StringFlag{
+		Name:    outputFileFlagName,
+		Aliases: []string{"out"},
+		Usage:   "file to write converted data to",
+	}
 
-		OutputFileFlag = &cli.StringFlag{
-			Name:    "output-file",
-			Aliases: []string{"out"},
-			Usage:   "file to write converted data to",
-		}
-
-		DelimiterFlag = &cli.StringFlag{
-			Name:    "delimiter",
-			Aliases: []string{"d"},
-			Value:   ",",
-			Usage:   "",
-		}
-	)
+	DelimiterFlag := &cli.StringFlag{
+		Name:    delimiterFlagName,
+		Aliases: []string{"d"},
+		Value:   ",",
+		Usage:   "",
+	}
 
 	app := cli.App{
 		Name:        "cj",
