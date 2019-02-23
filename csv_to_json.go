@@ -13,7 +13,7 @@ import (
 func csvToJson(context *cli.Context) error {
 	var in *os.File
 
-	if infile := context.String(InputFileFlag.Names()[0]); len(infile) < 1 {
+	if infile := context.String(InputFileFlag.Name); len(infile) < 1 {
 		//  check to see if the CSV was piped in using something like `cat`
 		fi, err := os.Stdin.Stat()
 		if err != nil {
@@ -36,8 +36,8 @@ func csvToJson(context *cli.Context) error {
 	}
 
 	w := &writer{os.Stdout}
-	if outfile := context.String(OutputFileFlag.Names()[0]); len(outfile) > 0 {
-		out, err := os.OpenFile(outfile, os.O_WRONLY|os.O_CREATE, 0666)
+	if outfile := context.String(OutputFileFlag.Name); len(outfile) > 0 {
+		out, err := os.OpenFile(outfile, os.O_WRONLY|os.O_CREATE, 0600)
 		if err != nil {
 			return cli.Exit(errors.Wrap(err, "unable to open output file"), 1)
 		}
@@ -48,7 +48,7 @@ func csvToJson(context *cli.Context) error {
 
 	reader := csv.NewReader(in)
 
-	delimiter := context.String(DelimiterFlag.Names()[0])
+	delimiter := context.String(DelimiterFlag.Name)
 	reader.Comma = []rune(delimiter)[0]
 
 	var columns []string
