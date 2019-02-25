@@ -9,6 +9,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+// Convert is a simple wrapper that takes in an io.Reader and io.Writer, converting the CSV data from the
+// reader to simple JSON and outputting to the supplied writer
 func Convert(delimiter rune, in io.Reader, out io.Writer) error {
 	reader := csv.NewReader(in)
 	reader.Comma = delimiter

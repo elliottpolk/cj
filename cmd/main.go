@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/elliottpolk/cj"
@@ -12,7 +14,8 @@ import (
 )
 
 var (
-	version string
+	version  string
+	compiled string = fmt.Sprint(time.Now().Unix())
 
 	inputFileFlag = &cli.StringFlag{
 		Name:    "input-file",
@@ -37,11 +40,17 @@ var (
 type row map[string]interface{}
 
 func main() {
+	ct, err := strconv.ParseInt(compiled, 10, 64)
+	if err != nil {
+		panic(err)
+	}
+
 	app := cli.App{
 		Name:        "cj",
 		Copyright:   fmt.Sprintf("Copyright © 2018 - %s Elliott Polk", time.Now().Format("2006")),
 		Description: "CSV to JSON converter",
 		Version:     version,
+		Compiled:    time.Unix(ct, -1),
 		Flags: []cli.Flag{
 			inputFileFlag,
 			outputFileFlag,
@@ -85,7 +94,7 @@ func main() {
 
 			delimiter := context.String(delimiterFlag.Name)
 
-			if err := cj.Convert([]rune(delimiter)[0], reader, writer); err != nil {
+			if err := cj.Convert([]rune(delimiter)[0], bufio.NewReader(reader), writer); err != nil {
 				return cli.Exit(err, 1)
 			}
 
