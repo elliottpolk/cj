@@ -37,8 +37,6 @@ var (
 	}
 )
 
-type row map[string]interface{}
-
 func main() {
 	ct, err := strconv.ParseInt(compiled, 10, 64)
 	if err != nil {
@@ -102,5 +100,7 @@ func main() {
 		},
 	}
 
-	app.Run(os.Args)
+	if err := app.Run(os.Args); err != nil {
+		panic(err)
+	}
 }

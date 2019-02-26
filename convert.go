@@ -64,6 +64,4 @@ func Convert(delimiter rune, in io.Reader, out io.Writer) error {
 			return errors.Wrap(err, "unable to write row data")
 		}
 	}
-
-	return nil
 }
