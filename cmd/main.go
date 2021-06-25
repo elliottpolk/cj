@@ -10,7 +10,7 @@ import (
 	"github.com/elliottpolk/cj"
 
 	"github.com/pkg/errors"
-	cli "gopkg.in/urfave/cli.v2"
+	cli "github.com/urfave/cli/v2"
 )
 
 var (
