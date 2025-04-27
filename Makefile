@@ -22,8 +22,8 @@ build: build-dir; $(info $(M) building ...)                        	@ ## build t
 
 .PHONY: install
 install: ; $(info $(M) installing locally...)                       @ ## install the binary locally
-	@GOOS=$(GOOS) go build -ldflags "-X main.version=$(VERSION) -X main.compiled=$(date +%s)" -o $(GOPATH)/bin/$(BIN) cmd/main.go
-	@chmod +x $(GOPATH)/bin/$(BIN)
+	@GOOS=$(GOOS) go build -ldflags "-X main.version=$(VERSION) -X main.compiled=$(date +%s)" -o $(HOME)/.local/bin/$(BIN) cmd/main.go
+	@chmod +x $(HOME)/.local/bin/$(BIN)
 
 .PHONY: test
 test: ; $(info $(M) running unit tests ...)                         @ ## run the unit tests
@@ -32,7 +32,7 @@ test: ; $(info $(M) running unit tests ...)                         @ ## run the
 .PHONY: clean
 clean: ; $(info $(M) running clean ...)                             @ ## clean up the old build dir
 	@rm -vrf build || true
-	@rm -v $(GOPATH)/bin/$(BIN) || true
+	@rm -v $(HOME)/.local/bin/$(BIN) || true
 	@go clean
 
 .PHONY: help
